@@ -169,7 +169,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
 
         with gr.Row(equal_height=True):
             with gr.Column():
-                input_image = gr.Image(label="Upload Image", type="pil", height=288)
+                input_image = gr.Image(label="Upload Image", type="pil")
                 
                 prompt = gr.Text(
                     label="Edit Prompt",
