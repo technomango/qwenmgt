@@ -210,7 +210,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
             inputs=[input_image, prompt, lora_adapter],
             outputs=[output_image, seed],
             fn=infer_example,
-            cache_examples=False,
+            cache_examples="lazy",
             label="Examples"
         )
 
