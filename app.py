@@ -206,7 +206,6 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 ["examples/3.jpg", "Rotate the camera 45 degrees to the right.", "Multiple-Angles"],
                 ["examples/3.jpg", "Switch the camera to a top-down view.", "Multiple-Angles"],
                 ["examples/3.jpg", "Switch the camera to a wide-angle lens.", "Multiple-Angles"],
-                ["examples/3.jpg", "Switch the camera to a close-up lens.", "Multiple-Angles"],
             ],
             inputs=[input_image, prompt, lora_adapter],
             outputs=[output_image, seed],
