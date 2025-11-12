@@ -125,6 +125,27 @@ pipe.load_lora_weights("dx8152/Qwen-Image-Edit-2509-Relight",
 pipe.transformer.set_attn_processor(QwenDoubleStreamAttnProcessorFA3())
 MAX_SEED = np.iinfo(np.int32).max
 
+def update_dimensions_on_upload(image):
+    if image is None:
+        return 1024, 1024
+    
+    original_width, original_height = image.size
+    
+    if original_width > original_height:
+        new_width = 1024
+        aspect_ratio = original_height / original_width
+        new_height = int(new_width * aspect_ratio)
+    else:
+        new_height = 1024
+        aspect_ratio = original_width / original_height
+        new_width = int(new_height * aspect_ratio)
+        
+    # Ensure dimensions are multiples of 8
+    new_width = (new_width // 8) * 8
+    new_height = (new_height // 8) * 8
+    
+    return new_width, new_height
+
 @spaces.GPU
 def infer(
     input_image,
@@ -155,7 +176,9 @@ def infer(
     negative_prompt = "worst quality, low quality, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, signature, watermark, username, blurry"
 
     original_image = input_image.convert("RGB")
-    width, height = original_image.size
+    
+    # Use the new function to update dimensions
+    width, height = update_dimensions_on_upload(original_image)
 
     result = pipe(
         image=original_image,
