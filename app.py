@@ -177,8 +177,8 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                         show_label=True,
                         placeholder="e.g., transform into anime",
                     )
-
-                run_button = gr.Button("Run", variant="primary")
+                with gr.Row():
+                    run_button = gr.Button("Run", variant="primary")
 
             with gr.Column():
                 output_image = gr.Image(label="Output Image", interactive=False, format="png", height=290)
