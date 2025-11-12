@@ -174,7 +174,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 prompt = gr.Text(
                     label="Edit Prompt",
                     show_label=True,
-                    placeholder="e.g., transform into anime",
+                    placeholder="e.g., transform into anime..",
                 )
 
                 run_button = gr.Button("Run", variant="primary")
