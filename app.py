@@ -171,14 +171,13 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
             with gr.Column():
                 input_image = gr.Image(label="Upload Image", type="pil")
                 
-                with gr.Row():
-                    prompt = gr.Text(
-                        label="Edit Prompt",
-                        show_label=True,
-                        placeholder="e.g., transform into anime",
-                    )
-                with gr.Row():
-                    run_button = gr.Button("Run", variant="primary")
+                prompt = gr.Text(
+                    label="Edit Prompt",
+                    show_label=True,
+                    placeholder="e.g., transform into anime",
+                )
+
+                run_button = gr.Button("Run", variant="primary")
 
             with gr.Column():
                 output_image = gr.Image(label="Output Image", interactive=False, format="png", height=290)
