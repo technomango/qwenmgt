@@ -9,21 +9,6 @@ from typing import Iterable
 from gradio.themes import Soft
 from gradio.themes.utils import colors, fonts, sizes
 
-colors.steel_blue = colors.Color(
-    name="steel_blue",
-    c50="#EBF3F8",
-    c100="#D3E5F0",
-    c200="#A8CCE1",
-    c300="#7DB3D2",
-    c400="#529AC3",
-    c500="#4682B4",
-    c600="#3E72A0",
-    c700="#36638C",
-    c800="#2E5378",
-    c900="#264364",
-    c950="#1E3450",
-)
-
 colors.orange_red = colors.Color(
     name="orange_red",
     c50="#FFF0E5",
