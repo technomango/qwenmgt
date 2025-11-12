@@ -1,5 +1,5 @@
 ---
-title: Qwen Image Edit 2509 LoRAs
+title: Qwen Image Edit 2509 LoRAs Fast
 emoji: ⚡
 colorFrom: purple
 colorTo: gray
