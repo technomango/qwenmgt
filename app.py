@@ -9,27 +9,27 @@ from typing import Iterable
 from gradio.themes import Soft
 from gradio.themes.utils import colors, fonts, sizes
 
-colors.orange_red = colors.Color(
-    name="orange_red",
-    c50="#FFF0E5",
-    c100="#FFE0CC",
-    c200="#FFC299",
-    c300="#FFA366",
-    c400="#FF8533",
-    c500="#FF4500",
-    c600="#E63E00",
-    c700="#CC3700",
-    c800="#B33000",
-    c900="#992900",
-    c950="#802200",
+colors.steel_blue = colors.Color(
+    name="steel_blue",
+    c50="#EBF3F8",
+    c100="#D3E5F0",
+    c200="#A8CCE1",
+    c300="#7DB3D2",
+    c400="#529AC3",
+    c500="#4682B4",
+    c600="#3E72A0",
+    c700="#36638C",
+    c800="#2E5378",
+    c900="#264364",
+    c950="#1E3450",
 )
 
-class OrangeRedTheme(Soft):
+class SteelBlueTheme(Soft):
     def __init__(
         self,
         *,
         primary_hue: colors.Color | str = colors.gray,
-        secondary_hue: colors.Color | str = colors.orange_red, # Use the new color
+        secondary_hue: colors.Color | str = colors.steel_blue,
         neutral_hue: colors.Color | str = colors.slate,
         text_size: sizes.Size | str = sizes.text_lg,
         font: fonts.Font | str | Iterable[fonts.Font | str] = (
@@ -56,8 +56,8 @@ class OrangeRedTheme(Soft):
             button_primary_text_color_hover="white",
             button_primary_background_fill="linear-gradient(90deg, *secondary_500, *secondary_600)",
             button_primary_background_fill_hover="linear-gradient(90deg, *secondary_600, *secondary_700)",
-            button_primary_background_fill_dark="linear-gradient(90deg, *secondary_600, *secondary_700)",
-            button_primary_background_fill_hover_dark="linear-gradient(90deg, *secondary_500, *secondary_600)",
+            button_primary_background_fill_dark="linear-gradient(90deg, *secondary_600, *secondary_800)",
+            button_primary_background_fill_hover_dark="linear-gradient(90deg, *secondary_500, *secondary_500)",
             button_secondary_text_color="black",
             button_secondary_text_color_hover="white",
             button_secondary_background_fill="linear-gradient(90deg, *primary_300, *primary_300)",
@@ -75,7 +75,7 @@ class OrangeRedTheme(Soft):
             block_label_background_fill="*primary_200",
         )
 
-orange_red_theme = OrangeRedTheme()
+steel_blue_theme = SteelBlueTheme()
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -187,7 +187,7 @@ css="""
 #main-title h1 {font-size: 2.1em !important;}
 """
 
-with gr.Blocks(css=css, theme=orange_red_theme) as demo:
+with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
     with gr.Column(elem_id="col-container"):
         gr.Markdown("# **Qwen-Image-Edit-2509-LoRAs-Fast**", elem_id="main-title")
         gr.Markdown("Perform diverse image edits using specialized [LoRA](https://huggingface.co/models?other=base_model:adapter:Qwen/Qwen-Image-Edit-2509) adapters for the [Qwen-Image-Edit](https://huggingface.co/Qwen/Qwen-Image-Edit-2509) model.")
