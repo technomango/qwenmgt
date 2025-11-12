@@ -24,12 +24,27 @@ colors.steel_blue = colors.Color(
     c950="#1E3450",
 )
 
-class SteelBlueTheme(Soft):
+colors.orange_red = colors.Color(
+    name="orange_red",
+    c50="#FFF0E5",
+    c100="#FFE0CC",
+    c200="#FFC299",
+    c300="#FFA366",
+    c400="#FF8533",
+    c500="#FF4500",
+    c600="#E63E00",
+    c700="#CC3700",
+    c800="#B33000",
+    c900="#992900",
+    c950="#802200",
+)
+
+class OrangeRedTheme(Soft):
     def __init__(
         self,
         *,
         primary_hue: colors.Color | str = colors.gray,
-        secondary_hue: colors.Color | str = colors.steel_blue,
+        secondary_hue: colors.Color | str = colors.orange_red, # Use the new color
         neutral_hue: colors.Color | str = colors.slate,
         text_size: sizes.Size | str = sizes.text_lg,
         font: fonts.Font | str | Iterable[fonts.Font | str] = (
@@ -56,14 +71,39 @@ class SteelBlueTheme(Soft):
             button_primary_text_color_hover="white",
             button_primary_background_fill="linear-gradient(90deg, *secondary_500, *secondary_600)",
             button_primary_background_fill_hover="linear-gradient(90deg, *secondary_600, *secondary_700)",
+            button_primary_background_fill_dark="linear-gradient(90deg, *secondary_600, *secondary_700)",
+            button_primary_background_fill_hover_dark="linear-gradient(90deg, *secondary_500, *secondary_600)",
+            button_secondary_text_color="black",
+            button_secondary_text_color_hover="white",
+            button_secondary_background_fill="linear-gradient(90deg, *primary_300, *primary_300)",
+            button_secondary_background_fill_hover="linear-gradient(90deg, *primary_400, *primary_400)",
+            button_secondary_background_fill_dark="linear-gradient(90deg, *primary_500, *primary_600)",
+            button_secondary_background_fill_hover_dark="linear-gradient(90deg, *primary_500, *primary_500)",
             slider_color="*secondary_500",
             slider_color_dark="*secondary_600",
             block_title_text_weight="600",
             block_border_width="3px",
             block_shadow="*shadow_drop_lg",
+            button_primary_shadow="*shadow_drop_lg",
+            button_large_padding="11px",
+            color_accent_soft="*primary_100",
+            block_label_background_fill="*primary_200",
         )
 
-steel_blue_theme = SteelBlueTheme()
+orange_red_theme = OrangeRedTheme()
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+print("CUDA_VISIBLE_DEVICES=", os.environ.get("CUDA_VISIBLE_DEVICES"))
+print("torch.__version__ =", torch.__version__)
+print("torch.version.cuda =", torch.version.cuda)
+print("cuda available:", torch.cuda.is_available())
+print("cuda device count:", torch.cuda.device_count())
+if torch.cuda.is_available():
+    print("current device:", torch.cuda.current_device())
+    print("device name:", torch.cuda.get_device_name(torch.cuda.current_device()))
+
+print("Using device:", device)
 
 from diffusers import FlowMatchEulerDiscreteScheduler
 from qwenimage.pipeline_qwenimage_edit_plus import QwenImageEditPlusPipeline
@@ -162,7 +202,7 @@ css="""
 #main-title h1 {font-size: 2.1em !important;}
 """
 
-with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
+with gr.Blocks(css=css, theme=orange_red_theme) as demo:
     with gr.Column(elem_id="col-container"):
         gr.Markdown("# **Qwen-Image-Edit-2509-LoRAs-Fast**", elem_id="main-title")
         gr.Markdown("Perform diverse image edits using specialized [LoRA](https://huggingface.co/models?other=base_model:adapter:Qwen/Qwen-Image-Edit-2509) adapters for the [Qwen-Image-Edit](https://huggingface.co/Qwen/Qwen-Image-Edit-2509) model.")
