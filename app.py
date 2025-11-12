@@ -198,7 +198,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
             examples=[
                 ["examples/1.jpg", "Transform into anime.", "Photo-to-Anime"],
                 ["examples/5.jpg", "Remove shadows and relight the image using soft lighting.", "Light-Restoration"],
-                ["examples/4.jpg", "Relight the image using soft, diffused lighting that simulates sunlight filtering.", "Relight"],
+                ["examples/4.jpg", "Use a subtle golden-hour filter with smooth light diffusion.", "Relight"],
                 ["examples/2.jpeg", "Rotate the camera 45 degrees to the left.", "Multiple-Angles"],
                 ["examples/2.jpeg", "Switch the camera to a top-down right corner view.", "Multiple-Angles"],
                 ["examples/6.jpeg", "Switch the camera to a bottom-up view.", "Multiple-Angles"],
