@@ -2,7 +2,7 @@
 title: Qwen Image Edit 2509 LoRAs Fast
 emoji: ⚡
 colorFrom: red
-colorTo: gray
+colorTo: yellow
 sdk: gradio
 sdk_version: 5.49.1
 app_file: app.py
