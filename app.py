@@ -228,7 +228,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 run_button = gr.Button("Run", variant="primary")
 
             with gr.Column():
-                output_image = gr.Image(label="Output Image", interactive=False, format="png", height=290)
+                output_image = gr.Image(label="Output Image", interactive=False, format="png", height=330)
                 
                 with gr.Row():
                     lora_adapter = gr.Dropdown(
@@ -236,7 +236,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                         choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Relight"],
                         value="Photo-to-Anime"
                     )
-                with gr.Accordion("Advanced Settings", open=False):
+                with gr.Accordion("Advanced Settings", open=False, visible=False):
                     seed = gr.Slider(label="Seed", minimum=0, maximum=MAX_SEED, step=1, value=0)
                     randomize_seed = gr.Checkbox(label="Randomize Seed", value=True)
                     guidance_scale = gr.Slider(label="Guidance Scale", minimum=1.0, maximum=10.0, step=0.1, value=1.0)
