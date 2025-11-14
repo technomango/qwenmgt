@@ -121,6 +121,9 @@ pipe.load_lora_weights("dx8152/Qwen-Image-Edit-2509-Light_restoration",
 pipe.load_lora_weights("dx8152/Qwen-Image-Edit-2509-Relight",
                        weight_name="Qwen-Edit-Relight.safetensors",
                        adapter_name="relight")
+pipe.load_lora_weights("eigen-ai-labs/eigen-banana-qwen-image-edit",
+                       weight_name="eigen-banana-qwen-image-edit-fp16-lora.safetensors",
+                       adapter_name="eigen-banana")
 
 pipe.transformer.set_attn_processor(QwenDoubleStreamAttnProcessorFA3())
 MAX_SEED = np.iinfo(np.int32).max
@@ -168,6 +171,8 @@ def infer(
         pipe.set_adapters(["light-restoration"], adapter_weights=[1.0])
     elif lora_adapter == "Relight":
         pipe.set_adapters(["relight"], adapter_weights=[1.0])
+    elif lora_adapter == "Eigen-Banana":
+        pipe.set_adapters(["eigen-banana"], adapter_weights=[1.0])
 
     if randomize_seed:
         seed = random.randint(0, MAX_SEED)
@@ -233,7 +238,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 with gr.Row():
                     lora_adapter = gr.Dropdown(
                         label="Choose Editing Style",
-                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Relight"],
+                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Relight", "Eigen-Banana"],
                         value="Photo-to-Anime"
                     )
                 with gr.Accordion("Advanced Settings", open=False, visible=False):
@@ -252,6 +257,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 ["examples/6.jpg", "Switch the camera to a bottom-up view.", "Multiple-Angles"],
                 ["examples/6.jpg", "Rotate the camera 180 degrees upside down.", "Multiple-Angles"],
                 ["examples/4.jpg", "Rotate the camera 45 degrees to the right.", "Multiple-Angles"],
+                ["examples/7.jpg", "Apply a vintage film aesthetic to the image, featuring a subtle desaturation of colors with a warm, golden-hour tone, introduce a fine and natural-looking film grain across the entire scene, gently reduce overall contrast for a softer appearance, and add a very faint, dark vignette to the edges to mimic an aged photographic print.", "Eigen-Banana"],
                 ["examples/4.jpg", "Switch the camera to a top-down view.", "Multiple-Angles"],
                 ["examples/4.jpg", "Switch the camera to a wide-angle lens.", "Multiple-Angles"],
             ],
