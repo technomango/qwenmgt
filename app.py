@@ -127,6 +127,9 @@ pipe.load_lora_weights("eigen-ai-labs/eigen-banana-qwen-image-edit",
 pipe.load_lora_weights("tlennon-ie/qwen-edit-skin",
                        weight_name="qwen-edit-skin_1.1_000002750.safetensors",
                        adapter_name="edit-skin")
+pipe.load_lora_weights("lovis93/next-scene-qwen-image-lora-2509",
+                       weight_name="next-scene_lora-v2-3000.safetensors",
+                       adapter_name="next-scene")
 
 pipe.transformer.set_attn_processor(QwenDoubleStreamAttnProcessorFA3())
 MAX_SEED = np.iinfo(np.int32).max
@@ -178,7 +181,9 @@ def infer(
         pipe.set_adapters(["eigen-banana"], adapter_weights=[1.0])
     elif lora_adapter == "Edit-Skin":
         pipe.set_adapters(["edit-skin"], adapter_weights=[1.0])
-
+    elif lora_adapter == "Next-Scene":
+        pipe.set_adapters(["next-scene"], adapter_weights=[1.0])
+        
     if randomize_seed:
         seed = random.randint(0, MAX_SEED)
 
@@ -243,7 +248,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 with gr.Row():
                     lora_adapter = gr.Dropdown(
                         label="Choose Editing Style",
-                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Relight", "Edit-Skin", "Eigen-Banana"],
+                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Relight", "Next-Scene", "Edit-Skin", "Eigen-Banana"],
                         value="Photo-to-Anime"
                     )
                 with gr.Accordion("Advanced Settings", open=False, visible=False):
@@ -259,6 +264,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 ["examples/4.jpg", "Use a subtle golden-hour filter with smooth light diffusion.", "Relight"],
                 ["examples/2.jpeg", "Rotate the camera 45 degrees to the left.", "Multiple-Angles"],
                 ["examples/2.jpeg", "Switch the camera to a top-down right corner view.", "Multiple-Angles"],
+                ["examples/9.jpg", "The camera moves slightly forward as sunlight breaks through the clouds, casting a soft glow around the character's silhouette in the mist. Realistic cinematic style, atmospheric depth.", "Next-Scene"],
                 ["examples/8.jpg", "Make the subjects skin details more prominent and natural.", "Edit-Skin"],
                 ["examples/6.jpg", "Switch the camera to a bottom-up view.", "Multiple-Angles"],
                 ["examples/7.jpg", "Apply a vintage film aesthetic to the image, featuring a subtle desaturation of colors with a warm, golden-hour tone, introduce a fine and natural-looking film grain across the entire scene, gently reduce overall contrast for a softer appearance, and add a very faint, dark vignette to the edges to mimic an aged photographic print.", "Eigen-Banana"],
