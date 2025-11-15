@@ -124,6 +124,9 @@ pipe.load_lora_weights("dx8152/Qwen-Image-Edit-2509-Relight",
 pipe.load_lora_weights("eigen-ai-labs/eigen-banana-qwen-image-edit",
                        weight_name="eigen-banana-qwen-image-edit-fp16-lora.safetensors",
                        adapter_name="eigen-banana")
+pipe.load_lora_weights("lrzjason/QwenEdit-Anything2Real_Alpha",
+                       weight_name="Anything2RealAlpha.safetensors",
+                       adapter_name="anything2real")
 
 pipe.transformer.set_attn_processor(QwenDoubleStreamAttnProcessorFA3())
 MAX_SEED = np.iinfo(np.int32).max
@@ -173,6 +176,8 @@ def infer(
         pipe.set_adapters(["relight"], adapter_weights=[1.0])
     elif lora_adapter == "Eigen-Banana":
         pipe.set_adapters(["eigen-banana"], adapter_weights=[1.0])
+    elif lora_adapter == "Anything-2-Real":
+        pipe.set_adapters(["anything2real"], adapter_weights=[1.0])
 
     if randomize_seed:
         seed = random.randint(0, MAX_SEED)
@@ -238,7 +243,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 with gr.Row():
                     lora_adapter = gr.Dropdown(
                         label="Choose Editing Style",
-                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Relight", "Eigen-Banana"],
+                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Relight", "Anything-2-Real", "Eigen-Banana"],
                         value="Photo-to-Anime"
                     )
                 with gr.Accordion("Advanced Settings", open=False, visible=False):
@@ -254,6 +259,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 ["examples/4.jpg", "Use a subtle golden-hour filter with smooth light diffusion.", "Relight"],
                 ["examples/2.jpeg", "Rotate the camera 45 degrees to the left.", "Multiple-Angles"],
                 ["examples/2.jpeg", "Switch the camera to a top-down right corner view.", "Multiple-Angles"],
+                ["examples/8.jpg", "Change the picture to realistic photograph.", "Anything-2-Real"],
                 ["examples/6.jpg", "Switch the camera to a bottom-up view.", "Multiple-Angles"],
                 ["examples/7.jpg", "Apply a vintage film aesthetic to the image, featuring a subtle desaturation of colors with a warm, golden-hour tone, introduce a fine and natural-looking film grain across the entire scene, gently reduce overall contrast for a softer appearance, and add a very faint, dark vignette to the edges to mimic an aged photographic print.", "Eigen-Banana"],
                 ["examples/6.jpg", "Rotate the camera 180 degrees upside down.", "Multiple-Angles"],
