@@ -177,7 +177,7 @@ def infer(
     elif lora_adapter == "Eigen-Banana":
         pipe.set_adapters(["eigen-banana"], adapter_weights=[1.0])
     elif lora_adapter == "Edit-Skin":
-        pipe.set_adapters(["edit-skin"], adapter_weights=[1.5])
+        pipe.set_adapters(["edit-skin"], adapter_weights=[1.0])
 
     if randomize_seed:
         seed = random.randint(0, MAX_SEED)
