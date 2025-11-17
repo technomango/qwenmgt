@@ -264,7 +264,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 ["examples/4.jpg", "Use a subtle golden-hour filter with smooth light diffusion.", "Relight"],
                 ["examples/2.jpeg", "Rotate the camera 45 degrees to the left.", "Multiple-Angles"],
                 ["examples/7.jpg", "Light source from the Right Rear", "Multi-Angle-Lighting"],
-                ["examples/7.jpg", "Light source from the Right Front", "Multi-Angle-Lighting"],
+                ["examples/7.jpg", "Light source from the Below", "Multi-Angle-Lighting"],
                 ["examples/2.jpeg", "Switch the camera to a top-down right corner view.", "Multiple-Angles"],
                 ["examples/9.jpg", "The camera moves slightly forward as sunlight breaks through the clouds, casting a soft glow around the character's silhouette in the mist. Realistic cinematic style, atmospheric depth.", "Next-Scene"],
                 ["examples/8.jpg", "Make the subjects skin details more prominent and natural.", "Edit-Skin"],
