@@ -121,9 +121,9 @@ pipe.load_lora_weights("dx8152/Qwen-Image-Edit-2509-Light_restoration",
 pipe.load_lora_weights("dx8152/Qwen-Image-Edit-2509-Relight",
                        weight_name="Qwen-Edit-Relight.safetensors",
                        adapter_name="relight")
-pipe.load_lora_weights("eigen-ai-labs/eigen-banana-qwen-image-edit",
-                       weight_name="eigen-banana-qwen-image-edit-fp16-lora.safetensors",
-                       adapter_name="eigen-banana")
+pipe.load_lora_weights("dx8152/Qwen-Edit-2509-Multi-Angle-Lighting",
+                       weight_name="多角度灯光-251116.safetensors",
+                       adapter_name="multi-angle-lighting")
 pipe.load_lora_weights("tlennon-ie/qwen-edit-skin",
                        weight_name="qwen-edit-skin_1.1_000002750.safetensors",
                        adapter_name="edit-skin")
@@ -177,8 +177,8 @@ def infer(
         pipe.set_adapters(["light-restoration"], adapter_weights=[1.0])
     elif lora_adapter == "Relight":
         pipe.set_adapters(["relight"], adapter_weights=[1.0])
-    elif lora_adapter == "Eigen-Banana":
-        pipe.set_adapters(["eigen-banana"], adapter_weights=[1.0])
+    elif lora_adapter == "Multi-Angle-Lighting":
+        pipe.set_adapters(["multi-angle-lighting"], adapter_weights=[1.0])
     elif lora_adapter == "Edit-Skin":
         pipe.set_adapters(["edit-skin"], adapter_weights=[1.0])
     elif lora_adapter == "Next-Scene":
@@ -248,7 +248,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 with gr.Row():
                     lora_adapter = gr.Dropdown(
                         label="Choose Editing Style",
-                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Relight", "Next-Scene", "Edit-Skin", "Eigen-Banana"],
+                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Multi-Angle-Lighting", "Relight", "Next-Scene", "Edit-Skin"],
                         value="Photo-to-Anime"
                     )
                 with gr.Accordion("Advanced Settings", open=False, visible=False):
@@ -263,11 +263,12 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 ["examples/5.jpg", "Remove shadows and relight the image using soft lighting.", "Light-Restoration"],
                 ["examples/4.jpg", "Use a subtle golden-hour filter with smooth light diffusion.", "Relight"],
                 ["examples/2.jpeg", "Rotate the camera 45 degrees to the left.", "Multiple-Angles"],
+                ["examples/7.jpg", "Light source from the rear left", "Multi-Angle-Lighting"],
+                ["examples/7.jpg", "Light source from the above", "Multi-Angle-Lighting"],
                 ["examples/2.jpeg", "Switch the camera to a top-down right corner view.", "Multiple-Angles"],
                 ["examples/9.jpg", "The camera moves slightly forward as sunlight breaks through the clouds, casting a soft glow around the character's silhouette in the mist. Realistic cinematic style, atmospheric depth.", "Next-Scene"],
                 ["examples/8.jpg", "Make the subjects skin details more prominent and natural.", "Edit-Skin"],
                 ["examples/6.jpg", "Switch the camera to a bottom-up view.", "Multiple-Angles"],
-                ["examples/7.jpg", "Apply a vintage film aesthetic to the image, featuring a subtle desaturation of colors with a warm, golden-hour tone, introduce a fine and natural-looking film grain across the entire scene, gently reduce overall contrast for a softer appearance, and add a very faint, dark vignette to the edges to mimic an aged photographic print.", "Eigen-Banana"],
                 ["examples/6.jpg", "Rotate the camera 180 degrees upside down.", "Multiple-Angles"],
                 ["examples/4.jpg", "Rotate the camera 45 degrees to the right.", "Multiple-Angles"],
                 ["examples/4.jpg", "Switch the camera to a top-down view.", "Multiple-Angles"],
