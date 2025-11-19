@@ -158,7 +158,7 @@ def update_dimensions_on_upload(image):
     
     return new_width, new_height
 
-@spaces.GPU(duration=25)
+@spaces.GPU(duration=40)
 def infer(
     input_image,
     prompt,
@@ -213,7 +213,7 @@ def infer(
 
     return result, seed
 
-@spaces.GPU(duration=25)
+@spaces.GPU(duration=40)
 def infer_example(input_image, prompt, lora_adapter):
     input_pil = input_image.convert("RGB")
     guidance_scale = 1.0
