@@ -133,9 +133,6 @@ pipe.load_lora_weights("lovis93/next-scene-qwen-image-lora-2509",
 pipe.load_lora_weights("vafipas663/Qwen-Edit-2509-Upscale-LoRA",
                        weight_name="qwen-edit-enhance_64-v3_000001000.safetensors",
                        adapter_name="upscale-image")
-pipe.load_lora_weights("tarn59/extract_texture_qwen_image_edit_2509",
-                       weight_name="extract_texture_qwen_image_edit_2509.safetensors",
-                       adapter_name="extract-texture")
 
 
 pipe.transformer.set_attn_processor(QwenDoubleStreamAttnProcessorFA3())
@@ -192,8 +189,6 @@ def infer(
         pipe.set_adapters(["next-scene"], adapter_weights=[1.0])
     elif lora_adapter == "Upscale-Image":
         pipe.set_adapters(["upscale-image"], adapter_weights=[1.0])
-    elif lora_adapter == "Extract-Texture":
-        pipe.set_adapters(["extract-texture"], adapter_weights=[1.0])
         
     if randomize_seed:
         seed = random.randint(0, MAX_SEED)
@@ -259,7 +254,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 with gr.Row():
                     lora_adapter = gr.Dropdown(
                         label="Choose Editing Style",
-                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Multi-Angle-Lighting", "Upscale-Image", "Relight", "Next-Scene", "Edit-Skin", "Extract-Texture"],
+                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Multi-Angle-Lighting", "Upscale-Image", "Relight", "Next-Scene", "Edit-Skin"],
                         value="Photo-to-Anime"
                     )
                 with gr.Accordion("Advanced Settings", open=False, visible=False):
@@ -275,7 +270,6 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 ["examples/4.jpg", "Use a subtle golden-hour filter with smooth light diffusion.", "Relight"],
                 ["examples/2.jpeg", "Rotate the camera 45 degrees to the left.", "Multiple-Angles"],
                 ["examples/7.jpg", "Light source from the Right Rear", "Multi-Angle-Lighting"],
-                ["examples/11.jpeg", "Extract stone texture from the wall. Extract into a texture image.", "Extract-Texture"],
                 ["examples/10.jpeg", "Upscale the image.", "Upscale-Image"],
                 ["examples/7.jpg", "Light source from the Below", "Multi-Angle-Lighting"],
                 ["examples/2.jpeg", "Switch the camera to a top-down right corner view.", "Multiple-Angles"],
