@@ -5,6 +5,7 @@ huggingface_hub
 sentencepiece 
 transformers
 torchvision
+supervision
 kernels
 spaces
 torch
