@@ -101,7 +101,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 pipe = QwenImageEditPlusPipeline.from_pretrained(
     "Qwen/Qwen-Image-Edit-2509",
     transformer=QwenImageTransformer2DModel.from_pretrained(
-        "linoyts/Qwen-Image-Edit-Rapid-AIO",
+        "linoyts/Qwen-Image-Edit-Rapid-AIO", # [transformer weights extracted from: Phr00t/Qwen-Image-Edit-Rapid-AIO]
         subfolder='transformer',
         torch_dtype=dtype,
         device_map='cuda'
