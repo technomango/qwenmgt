@@ -8,5 +8,7 @@ torchvision
 supervision
 kernels
 spaces
+hf_xet
 torch
 numpy
+av
