@@ -293,5 +293,6 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
         inputs=[input_image, prompt, lora_adapter, seed, randomize_seed, guidance_scale, steps],
         outputs=[output_image, seed]
     )
-    
-demo.launch(mcp_server=True, ssr_mode=False, show_error=True)
+
+if __name__ == "__main__":
+    demo.queue(max_size=30).launch(mcp_server=True, ssr_mode=False, show_error=True)
