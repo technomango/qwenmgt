@@ -133,9 +133,6 @@ pipe.load_lora_weights("lovis93/next-scene-qwen-image-lora-2509",
 pipe.load_lora_weights("vafipas663/Qwen-Edit-2509-Upscale-LoRA",
                        weight_name="qwen-edit-enhance_64-v3_000001000.safetensors",
                        adapter_name="upscale-image")
-#pipe.load_lora_weights("valiantcat/Qwen-Image-Edit-2509-Upscale2K",
-#                       weight_name="qwen_image_edit_2509_upscale.safetensors",
-#                       adapter_name="upscale-image-v2")
 
 pipe.transformer.set_attn_processor(QwenDoubleStreamAttnProcessorFA3())
 MAX_SEED = np.iinfo(np.int32).max
@@ -191,8 +188,6 @@ def infer(
         pipe.set_adapters(["next-scene"], adapter_weights=[1.0])
     elif lora_adapter == "Upscale-Image":
         pipe.set_adapters(["upscale-image"], adapter_weights=[1.0])
-#    elif lora_adapter == "Upscale-Image-v2":
-#        pipe.set_adapters(["upscale-image-v2"], adapter_weights=[1.0])
         
     if randomize_seed:
         seed = random.randint(0, MAX_SEED)
@@ -258,9 +253,7 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 with gr.Row():
                     lora_adapter = gr.Dropdown(
                         label="Choose Editing Style",
-                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Multi-Angle-Lighting", "Upscale-Image", "Relight", "Next-Scene", "Edit-Skin", 
-                                # "Upscale-Image-v2"
-                                ],
+                        choices=["Photo-to-Anime", "Multiple-Angles", "Light-Restoration", "Multi-Angle-Lighting", "Upscale-Image", "Relight", "Next-Scene", "Edit-Skin"],
                         value="Photo-to-Anime"
                     )
                 with gr.Accordion("Advanced Settings", open=False, visible=False):
@@ -275,7 +268,6 @@ with gr.Blocks(css=css, theme=steel_blue_theme) as demo:
                 ["examples/5.jpg", "Remove shadows and relight the image using soft lighting.", "Light-Restoration"],
                 ["examples/4.jpg", "Use a subtle golden-hour filter with smooth light diffusion.", "Relight"],
                 ["examples/2.jpeg", "Rotate the camera 45 degrees to the left.", "Multiple-Angles"],
-              # ["examples/11.jpg", "Upscale this picture to 4K resolution.", "Upscale-Image-v2"],
                 ["examples/7.jpg", "Light source from the Right Rear", "Multi-Angle-Lighting"],
                 ["examples/10.jpeg", "Upscale the image.", "Upscale-Image"],
                 ["examples/7.jpg", "Light source from the Below", "Multi-Angle-Lighting"],
